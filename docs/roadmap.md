@@ -32,6 +32,13 @@ Keep engine, CLI, binding prototypes, small fixtures, and design documents in
 Move a large corpus to `test-vectors` with immutable releases and checksums;
 consumers need not use Git submodules. Preserve fixture provenance and licenses.
 
+[OpenARI Capture](https://github.com/open-ari/openari-capture) is a separate
+research track for independent camera signing, a Pi prototype, and manufacturer
+integration. Its [milestones](https://github.com/open-ari/openari-capture/milestones)
+do not change Apple ARI support or the release gates above. Capture profiles,
+trust roots, and evidence claims remain distinct from Apple attestations and
+operator verification receipts.
+
 ## Decisions still needed
 
 Authoritative Apple profile access, positive fixture rights, public trust and
