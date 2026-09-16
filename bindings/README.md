@@ -2,6 +2,11 @@
 
 Status: C ABI prototype only. No language packages are published.
 
+The native library target is `openari_ffi`: `libopenari_ffi.so` on Linux,
+`libopenari_ffi.dylib` on macOS, and `openari_ffi.dll` on Windows. This keeps
+library artifacts and debug symbols distinct from the `openari` executable.
+The C header and exported `openari_*` symbols retain their names.
+
 The C header is `include/openari.h`. It exposes ABI version 1 and a JSON report
 function with an explicit schema version. The caller supplies all buffers, so
 no cross-runtime allocator/free pairing is required. A sizing call returns the

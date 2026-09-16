@@ -4,12 +4,12 @@ Independent open-source tools for Apple Reference Image.
 
 OpenARI is building a shared verification engine for applications that accept
 image uploads, forensic tools, and language libraries. This repository contains
-the Rust core, the `arictl` CLI, and an experimental C interface.
+the Rust core, the `openari` CLI, and an experimental C interface.
 
 **Development status:** no Apple ARI format revision is supported yet. The code
 recognizes preliminary JPEG/TIFF container hints and emits structured reports.
 It does not parse ARI payloads, verify signatures, establish trust, or check
-revocation. `arictl verify` always reports `indeterminate` and exits with code 3.
+revocation. `openari verify` always reports `indeterminate` and exits with code 3.
 Do not use this scaffold to accept images as authenticated.
 
 This project is not affiliated with or endorsed by Apple. See [TRADEMARKS.md](TRADEMARKS.md).
@@ -19,9 +19,9 @@ This project is not affiliated with or endorsed by Apple. See [TRADEMARKS.md](TR
 Requires the Rust toolchain in `rust-toolchain.toml`.
 
 ```sh
-cargo run -p arictl -- capabilities
-cargo run -p arictl -- inspect photo.jpg
-cargo run -p arictl -- verify photo.jpg
+cargo run -p openari-cli -- capabilities
+cargo run -p openari-cli -- inspect photo.jpg
+cargo run -p openari-cli -- verify photo.jpg
 cargo test --workspace --locked
 ```
 

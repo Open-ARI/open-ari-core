@@ -1,5 +1,5 @@
 [package]
-name = "arictl"
+name = "openari-cli"
 description = "Inspect OpenARI capabilities and preliminary image container hints"
 version.workspace = true
 edition.workspace = true
@@ -9,6 +9,10 @@ authors.workspace = true
 repository.workspace = true
 homepage.workspace = true
 publish.workspace = true
+
+[[bin]]
+name = "openari"
+path = "src/main.rs"
 
 [dependencies]
 openari-core.workspace = true
