@@ -30,7 +30,7 @@ Do not use this scaffold to accept images as authenticated.
 This project is not affiliated with or endorsed by Apple. See [TRADEMARKS.md](TRADEMARKS.md).
 
 Independent camera signing is planned separately in
-[OpenARI Capture](https://github.com/open-ari/openari-capture). That repository is
+[OpenARI Capture](https://github.com/open-ari/open-ari-capture). That repository is
 an architecture-only scaffold with its own capture profiles and trust model.
 It cannot issue Apple ARI attestations.
 

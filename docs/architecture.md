@@ -12,7 +12,7 @@ access, system clock reads, global mutable trust store, or image upload behavior
 Bindings call the same core rather than reimplementing verification rules.
 
 Independent camera signing and capture-evidence verification are planned in
-[openari-capture](https://github.com/open-ari/openari-capture). Its camera adapters,
+[open-ari-capture](https://github.com/open-ari/open-ari-capture). Its camera adapters,
 signing backends, and private/manufacturer trust roots stay outside this Apple ARI
 engine. Future integration may use optional commands in the existing openari CLI;
 no capture API or command is implemented here. Never fall back from failed Apple
