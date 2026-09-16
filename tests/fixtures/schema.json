@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openari.org/schemas/fixture-manifest-v1.json",
+  "title": "OpenARI synthetic prefix fixture manifest v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "corpus_revision", "cases"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "corpus_revision": { "type": "string", "minLength": 1 },
+    "cases": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "hex", "sha256", "provenance", "license", "policy_id", "evaluation_time", "trust_snapshot", "revocation_snapshot", "expected"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "hex": { "type": "string", "pattern": "^([0-9a-f]{2})*$" },
+          "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+          "provenance": { "const": "synthetic-prefix-not-an-image" },
+          "license": { "const": "Apache-2.0" },
+          "policy_id": { "const": "openari.pre-spec/1" },
+          "evaluation_time": { "type": "null" },
+          "trust_snapshot": { "type": "null" },
+          "revocation_snapshot": { "type": "null" },
+          "expected": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["container_hint", "decision", "reason"],
+            "properties": {
+              "container_hint": { "enum": ["jpeg", "tiff", "unknown"] },
+              "decision": { "const": "indeterminate" },
+              "reason": { "enum": ["specification_pending", "unrecognized_container"] }
+            }
+          }
+        }
+      }
+    }
+  }
+}

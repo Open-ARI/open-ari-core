@@ -1,0 +1,22 @@
+[package]
+name = "openari-ffi"
+description = "Experimental versioned C ABI for OpenARI"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+homepage.workspace = true
+publish.workspace = true
+
+[lib]
+name = "openari"
+crate-type = ["cdylib", "staticlib", "rlib"]
+
+[dependencies]
+openari-core.workspace = true
+serde_json.workspace = true
+
+[lints]
+workspace = true

@@ -1,0 +1,19 @@
+[package]
+name = "openari-fuzz"
+version = "0.0.0"
+publish = false
+edition = "2024"
+license = "Apache-2.0"
+[package.metadata]
+cargo-fuzz = true
+[dependencies]
+libfuzzer-sys = "0.4"
+openari-core = { path = "../crates/openari-core" }
+[[bin]]
+name = "inspect_verify"
+path = "fuzz_targets/inspect_verify.rs"
+test = false
+doc = false
+bench = false
+[workspace]
+members = ["."]

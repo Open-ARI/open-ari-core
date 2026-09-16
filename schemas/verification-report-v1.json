@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openari.org/schemas/verification-report-v1.json",
+  "title": "OpenARI pre-spec verification report schema 1",
+  "description": "Experimental report. This schema cannot represent a verified image.",
+  "type": "object",
+  "required": ["schema_version", "engine_version", "policy_id", "inspection", "decision", "reason", "structure", "image_integrity", "signature", "trust", "revocation", "capture_interval"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "engine_version": { "type": "string" },
+    "policy_id": { "const": "openari.pre-spec/1" },
+    "decision": { "const": "indeterminate" },
+    "reason": { "enum": ["specification_pending", "unrecognized_container"] },
+    "structure": { "const": "not_checked" },
+    "image_integrity": { "const": "not_checked" },
+    "signature": { "const": "not_checked" },
+    "trust": { "const": "not_checked" },
+    "revocation": { "const": "not_checked" },
+    "capture_interval": { "type": "null" },
+    "inspection": {
+      "type": "object",
+      "required": ["schema_version", "input_bytes", "container_hint", "ari_version"],
+      "properties": {
+        "schema_version": { "const": 1 },
+        "input_bytes": { "type": "integer", "minimum": 0 },
+        "container_hint": { "enum": ["jpeg", "tiff", "unknown"] },
+        "ari_version": { "type": "null" }
+      }
+    }
+  }
+}

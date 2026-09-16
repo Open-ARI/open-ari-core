@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "corpus_revision": "scaffold-1",
+  "cases": [
+    {
+      "id": "empty",
+      "hex": "",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "provenance": "synthetic-prefix-not-an-image",
+      "license": "Apache-2.0",
+      "policy_id": "openari.pre-spec/1",
+      "evaluation_time": null,
+      "trust_snapshot": null,
+      "revocation_snapshot": null,
+      "expected": {
+        "container_hint": "unknown",
+        "decision": "indeterminate",
+        "reason": "unrecognized_container"
+      }
+    },
+    {
+      "id": "jpeg-prefix",
+      "hex": "ffd8ff",
+      "sha256": "6e568e1f67fba258184c78181539e5e8fdee447e49bb706fc0ea34fbf12336a5",
+      "provenance": "synthetic-prefix-not-an-image",
+      "license": "Apache-2.0",
+      "policy_id": "openari.pre-spec/1",
+      "evaluation_time": null,
+      "trust_snapshot": null,
+      "revocation_snapshot": null,
+      "expected": {
+        "container_hint": "jpeg",
+        "decision": "indeterminate",
+        "reason": "specification_pending"
+      }
+    },
+    {
+      "id": "tiff-le-prefix",
+      "hex": "49492a00",
+      "sha256": "75a2a13326b2a4a0b2265dbc2d0a91bfc7b540f0b10b5b9abd2a3fc9d7b83016",
+      "provenance": "synthetic-prefix-not-an-image",
+      "license": "Apache-2.0",
+      "policy_id": "openari.pre-spec/1",
+      "evaluation_time": null,
+      "trust_snapshot": null,
+      "revocation_snapshot": null,
+      "expected": {
+        "container_hint": "tiff",
+        "decision": "indeterminate",
+        "reason": "specification_pending"
+      }
+    },
+    {
+      "id": "tiff-be-prefix",
+      "hex": "4d4d002a",
+      "sha256": "ea50985d8479da131a150350cb5fc7a94f80a33df6ee4fd53e368624fdff64dd",
+      "provenance": "synthetic-prefix-not-an-image",
+      "license": "Apache-2.0",
+      "policy_id": "openari.pre-spec/1",
+      "evaluation_time": null,
+      "trust_snapshot": null,
+      "revocation_snapshot": null,
+      "expected": {
+        "container_hint": "tiff",
+        "decision": "indeterminate",
+        "reason": "specification_pending"
+      }
+    },
+    {
+      "id": "truncated-jpeg",
+      "hex": "ffd8",
+      "sha256": "71563ad80061407ede9c6f316836284bd3710a520c5a792b5eda1cb703690815",
+      "provenance": "synthetic-prefix-not-an-image",
+      "license": "Apache-2.0",
+      "policy_id": "openari.pre-spec/1",
+      "evaluation_time": null,
+      "trust_snapshot": null,
+      "revocation_snapshot": null,
+      "expected": {
+        "container_hint": "unknown",
+        "decision": "indeterminate",
+        "reason": "unrecognized_container"
+      }
+    },
+    {
+      "id": "text",
+      "hex": "6e6f7420616e20696d616765",
+      "sha256": "5464533c9647b67eb320c40ccc5959537c09102ae75388f6a7675b433e745c9d",
+      "provenance": "synthetic-prefix-not-an-image",
+      "license": "Apache-2.0",
+      "policy_id": "openari.pre-spec/1",
+      "evaluation_time": null,
+      "trust_snapshot": null,
+      "revocation_snapshot": null,
+      "expected": {
+        "container_hint": "unknown",
+        "decision": "indeterminate",
+        "reason": "unrecognized_container"
+      }
+    }
+  ]
+}

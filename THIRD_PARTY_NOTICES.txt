@@ -1,0 +1,8 @@
+OpenARI third-party notices
+
+The Apache-2.0 license covers original project code and documentation.
+Dependencies retain their own licenses. Lockfiles identify exact dependency versions.
+No third-party image corpus, Apple code, or Apple trust material is bundled.
+Before distributing binaries or the built website, generate the dependency
+license inventory and include the required notices for all bundled components.
+This source-tree notice is not a completed binary-distribution inventory.
