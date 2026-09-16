@@ -7,7 +7,8 @@ Status: accepted direction; only the pre-spec scaffold exists today.
 `openari-core` owns bounded parsing, format dispatch, signed-byte selection,
 cryptographic orchestration, and policy evaluation. It has no implicit network
 access, system clock reads, global mutable trust store, or image upload behavior.
-`arictl` owns file access and presentation. `openari-ffi` owns unsafe C interop.
+`openari-cli` builds the `openari` executable and owns file access and presentation.
+`openari-ffi` owns unsafe C interop.
 Bindings call the same core rather than reimplementing verification rules.
 
 ```mermaid

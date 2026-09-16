@@ -4,7 +4,7 @@ use std::process::Command;
 
 #[test]
 fn verification_does_not_exit_successfully() {
-    let output = Command::new(env!("CARGO_BIN_EXE_arictl"))
+    let output = Command::new(env!("CARGO_BIN_EXE_openari"))
         .args(["verify", concat!(env!("CARGO_MANIFEST_DIR"), "/Cargo.toml")])
         .output()
         .unwrap();
@@ -16,7 +16,7 @@ fn verification_does_not_exit_successfully() {
 
 #[test]
 fn capabilities_do_not_advertise_apple_support() {
-    let output = Command::new(env!("CARGO_BIN_EXE_arictl"))
+    let output = Command::new(env!("CARGO_BIN_EXE_openari"))
         .arg("capabilities")
         .output()
         .unwrap();

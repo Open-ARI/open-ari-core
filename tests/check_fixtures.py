@@ -11,7 +11,7 @@ import tempfile
 root = Path(__file__).resolve().parents[1]
 manifest = json.loads((root / "tests/fixtures/manifest.json").read_text())
 assert manifest["schema_version"] == 1
-binary = root / "target/debug" / ("arictl.exe" if os.name == "nt" else "arictl")
+binary = root / "target/debug" / ("openari.exe" if os.name == "nt" else "openari")
 seen = set()
 for case in manifest["cases"]:
     assert case["id"] not in seen

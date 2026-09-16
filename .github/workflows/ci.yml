@@ -32,7 +32,7 @@ jobs:
         if: runner.os != 'Windows'
         shell: bash
         run: |
-          cc -Wall -Wextra -Werror -Iinclude tests/ffi_smoke.c -Ltarget/debug -lopenari -Wl,-rpath,"$PWD/target/debug" -o target/ffi-smoke
+          cc -Wall -Wextra -Werror -Iinclude tests/ffi_smoke.c -Ltarget/debug -lopenari_ffi -Wl,-rpath,"$PWD/target/debug" -o target/ffi-smoke
           target/ffi-smoke
       - name: Validate fixture manifests
         run: python tests/check_fixtures.py

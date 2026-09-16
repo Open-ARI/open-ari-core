@@ -1,5 +1,5 @@
 [workspace]
-members = ["crates/openari-core", "crates/openari-ffi", "crates/arictl"]
+members = ["crates/openari-core", "crates/openari-ffi", "crates/openari-cli"]
 resolver = "3"
 
 [workspace.package]

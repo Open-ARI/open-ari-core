@@ -11,6 +11,7 @@ use std::{
 
 #[derive(Parser)]
 #[command(
+    name = "openari",
     version,
     about = "OpenARI pre-spec tooling. No Apple ARI revision is verified yet."
 )]
@@ -65,7 +66,7 @@ fn main() -> ExitCode {
     match run(Args::parse()) {
         Ok(code) => ExitCode::from(code),
         Err(error) => {
-            eprintln!("arictl: {error}");
+            eprintln!("openari: {error}");
             ExitCode::from(2)
         }
     }
