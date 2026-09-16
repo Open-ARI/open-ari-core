@@ -1,8 +1,21 @@
-# OpenARI
+<p align="center">
+  <a href="https://openari.org"><img src="assets/openari-logo.png" alt="OpenARI mosaic logo" width="128" height="128"></a>
+</p>
 
-<p><a href="https://openari.org"><img src="assets/openari-logo.png" alt="OpenARI mosaic logo" width="192" height="192"></a></p>
+<h1 align="center">OpenARI</h1>
 
-Independent open-source tools for Apple Reference Image.
+<p align="center">
+  Independent open-source tools for Apple Reference Image.
+</p>
+
+<p align="center">
+  <a href="https://github.com/open-ari/open-ari-core/actions/workflows/ci.yml"><img src="https://github.com/open-ari/open-ari-core/actions/workflows/ci.yml/badge.svg?branch=main" alt="CI status"></a>
+  <a href="docs/format-status.md"><img src="https://img.shields.io/badge/status-pre--spec-orange" alt="Pre-spec development status"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/open-ari/open-ari-core" alt="Apache 2.0 license"></a>
+  <a href="Cargo.toml"><img src="https://img.shields.io/badge/Rust-1.88%2B-000000?logo=rust&amp;logoColor=white" alt="Minimum supported Rust version: 1.88"></a>
+  <a href="https://openari.org"><img src="https://img.shields.io/badge/docs-openari.org-007D79" alt="OpenARI documentation"></a>
+  <a href="https://github.com/sponsors/shoon"><img src="https://img.shields.io/badge/Sponsor-shoon-EA4AAA?logo=githubsponsors&amp;logoColor=white" alt="Sponsor shoon on GitHub"></a>
+</p>
 
 OpenARI is building a shared verification engine for applications that accept
 image uploads, forensic tools, and language libraries. This repository contains
