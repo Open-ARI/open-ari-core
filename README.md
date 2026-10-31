@@ -21,11 +21,15 @@ OpenARI is building a shared verification engine for applications that accept
 image uploads, forensic tools, and language libraries. This repository contains
 the Rust core, the `openari` CLI, and an experimental C interface.
 
-**Development status:** no Apple ARI format revision is supported yet. The code
-recognizes preliminary JPEG/TIFF container hints and emits structured reports.
-It does not parse ARI payloads, verify signatures, establish trust, or check
-revocation. `openari verify` always reports `indeterminate` and exits with code 3.
-Do not use this scaffold to accept images as authenticated.
+**Development status:** no Apple ARI format revision is supported yet. Apple has
+described the design but not published the file format, keys, or revocation
+list ([format status](docs/format-status.md)). The code lists JPEG, TIFF/DNG, and
+ISOBMFF/HEIC structure and includes a composite ML-DSA-87 + RSA-3072-PSS
+signature primitive checked against IETF test vectors, and an RFC 3161
+timestamp token verifier. It does not locate ARI
+payloads, verify Apple signatures, establish trust, or check revocation.
+`openari verify` always reports `indeterminate` and exits with code 3.
+Do not use this code to accept images as authenticated.
 
 This project is not affiliated with or endorsed by Apple. See [TRADEMARKS.md](TRADEMARKS.md).
 
@@ -41,13 +45,16 @@ Requires the Rust toolchain in `rust-toolchain.toml`.
 ```sh
 cargo run -p openari-cli -- capabilities
 cargo run -p openari-cli -- inspect photo.jpg
+cargo run -p openari-cli -- structure photo.jpg
 cargo run -p openari-cli -- verify photo.jpg
 cargo test --workspace --locked
 ```
 
 Input is limited to 64 MiB by default. The CLI accepts regular files and outputs
 JSON. Inspection success means a report was produced, not that a valid image or
-an ARI signature was found. No file contents are uploaded anywhere.
+an ARI signature was found. `structure` lists segments, directories, or boxes
+with offsets and SHA-256 digests; its output can include identifying metadata
+such as camera make and model. No file contents are uploaded anywhere.
 
 ## Documentation
 
@@ -59,6 +66,7 @@ an ARI signature was found. No file contents are uploaded anywhere.
 | [Versioning](docs/versioning.md) | Apple revisions, ABI, schemas, policy, and compatibility |
 | [Verification policy](docs/verification-policy.md) | Decisions, trust, time, revocation, and attestation |
 | [Security model](docs/threat-model.md) | Threats, limits, and review requirements |
+| [Dependencies](docs/dependencies.md) | Licenses, crypto review, and advisory exceptions |
 | [Upload integration](docs/upload-integration.md) | Admission control and application examples |
 | [Performance](docs/performance.md) | Benchmarks, CPU acceleration, and batch processing |
 | [Releases](docs/releases.md) | Artifact plans and release gates |

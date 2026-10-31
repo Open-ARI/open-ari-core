@@ -1,12 +1,15 @@
 # Architecture
 
-Status: accepted direction; only the pre-spec scaffold exists today.
+Status: accepted direction. The pre-spec scaffold, structure walkers, and a
+composite signature primitive exist today.
 
 ## Boundaries
 
 `openari-core` owns bounded parsing, format dispatch, signed-byte selection,
 cryptographic orchestration, and policy evaluation. It has no implicit network
 access, system clock reads, global mutable trust store, or image upload behavior.
+`openari-crypto` holds reviewed signature primitives. `openari-core` does not
+depend on it yet, so no signature result can reach a verification report.
 `openari-cli` builds the `openari` executable and owns file access and presentation.
 `openari-ffi` owns unsafe C interop.
 Bindings call the same core rather than reimplementing verification rules.
@@ -35,10 +38,10 @@ flowchart LR
 
 | Module | Responsibility |
 | --- | --- |
-| `container` | Bounded JPEG/TIFF traversal; offsets refer to the original input |
+| `structure` (exists) | Bounded JPEG, TIFF/DNG, and ISOBMFF/HEIC listings; offsets refer to the original input |
 | `format` | Exact profile registry; unsupported versions remain unsupported |
 | `evidence` | Owned or borrowed immutable evidence with explicit provenance |
-| `crypto` | Approved algorithm suites and interchangeable tested implementations |
+| `openari-crypto` (exists) | Approved algorithm suites and interchangeable tested implementations |
 | `trust` | Explicit anchors and constraints; no reliance on the OS web PKI |
 | `policy` | Full decision from evidence, snapshots, limits, and supplied time |
 | `inspect` | Forensic data marked untrusted until separately verified |
@@ -60,11 +63,11 @@ the verification path. Each request retains the snapshot it started with.
 
 ## Dependencies
 
-Current dependencies provide CLI parsing and report serialization only. Select
-ASN.1, certificate validation, hashing, and composite-signature implementations
-after a profile compatibility spike. Record license, maintenance, audits,
-platform support, fuzz history, known advisories, and performance measurements.
-Parsing a certificate or checking its signature is not full path validation.
+Dependencies cover CLI parsing, report serialization, SHA-2, ML-DSA, RSA-PSS,
+and ECDSA P-256 verification. [Dependencies](dependencies.md) records licenses, audit
+status, and advisory exceptions. CMS, X.509, and TSTInfo decoding use the
+RustCrypto `der` 0.7 stack. Certificate path validation is not selected yet. Parsing a certificate or checking its
+signature is not full path validation.
 
 No dynamic loading of arbitrary crypto plugins. Providers are reviewed build
 choices, identified in capabilities and reports. Core policy must produce the

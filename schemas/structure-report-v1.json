@@ -1,0 +1,168 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openari.org/schemas/structure-report-v1.json",
+  "title": "OpenARI structure report schema 1",
+  "description": "Bounded structural listing of a JPEG, TIFF/DNG, or ISOBMFF/HEIC input. Not ARI detection or verification. Offsets are byte offsets into the original input.",
+  "type": "object",
+  "required": ["schema_version", "notice", "input_bytes", "sha256", "container", "jpeg", "tiff", "isobmff", "findings", "findings_truncated"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "notice": { "type": "string" },
+    "input_bytes": { "type": "integer", "minimum": 0 },
+    "sha256": { "$ref": "#/$defs/sha256" },
+    "container": { "enum": ["jpeg", "tiff", "isobmff", "unknown"] },
+    "jpeg": {
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "required": ["segments", "segments_truncated", "eoi_offset", "trailer"],
+          "properties": {
+            "segments": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["offset", "marker", "name", "length", "payload_offset", "payload_length", "identifier", "payload_sha256", "scan_data_length"],
+                "properties": {
+                  "offset": { "$ref": "#/$defs/offset" },
+                  "marker": { "type": "integer", "minimum": 0, "maximum": 255 },
+                  "name": { "type": "string" },
+                  "length": { "$ref": "#/$defs/offset" },
+                  "payload_offset": { "$ref": "#/$defs/offset" },
+                  "payload_length": { "$ref": "#/$defs/offset" },
+                  "identifier": { "type": ["string", "null"] },
+                  "payload_sha256": { "$ref": "#/$defs/sha256" },
+                  "scan_data_length": { "type": ["integer", "null"], "minimum": 0 }
+                }
+              }
+            },
+            "segments_truncated": { "type": "boolean" },
+            "eoi_offset": { "type": ["integer", "null"], "minimum": 0 },
+            "trailer": {
+              "oneOf": [
+                { "type": "null" },
+                {
+                  "type": "object",
+                  "required": ["offset", "length", "sha256", "starts_with_soi"],
+                  "properties": {
+                    "offset": { "$ref": "#/$defs/offset" },
+                    "length": { "$ref": "#/$defs/offset" },
+                    "sha256": { "$ref": "#/$defs/sha256" },
+                    "starts_with_soi": { "type": "boolean" }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "tiff": {
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "required": ["byte_order", "big_tiff", "first_ifd_offset", "dng_version_tag", "ifds", "ifds_truncated"],
+          "properties": {
+            "byte_order": { "enum": ["little", "big"] },
+            "big_tiff": { "type": "boolean" },
+            "first_ifd_offset": { "type": ["integer", "null"], "minimum": 0 },
+            "dng_version_tag": { "type": ["string", "null"] },
+            "ifds": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["path", "offset", "entry_count", "entries", "next_ifd_offset"],
+                "properties": {
+                  "path": { "type": "string" },
+                  "offset": { "$ref": "#/$defs/offset" },
+                  "entry_count": { "type": "integer", "minimum": 0, "maximum": 65535 },
+                  "next_ifd_offset": { "type": ["integer", "null"], "minimum": 0 },
+                  "entries": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": ["tag", "name", "field_type", "count", "value_length", "value_offset", "value_sha256", "value_preview"],
+                      "properties": {
+                        "tag": { "type": "integer", "minimum": 0, "maximum": 65535 },
+                        "name": { "type": ["string", "null"] },
+                        "field_type": { "type": "integer", "minimum": 0, "maximum": 65535 },
+                        "count": { "type": "integer", "minimum": 0 },
+                        "value_length": { "type": ["integer", "null"], "minimum": 0 },
+                        "value_offset": { "type": ["integer", "null"], "minimum": 0 },
+                        "value_sha256": { "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/sha256" }] },
+                        "value_preview": { "type": ["string", "null"] }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "ifds_truncated": { "type": "boolean" }
+          }
+        }
+      ]
+    },
+    "isobmff": {
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "required": ["major_brand", "minor_version", "compatible_brands", "boxes", "boxes_truncated", "items"],
+          "properties": {
+            "major_brand": { "type": ["string", "null"] },
+            "minor_version": { "type": ["integer", "null"], "minimum": 0 },
+            "compatible_brands": { "type": "array", "items": { "type": "string" } },
+            "boxes": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["offset", "depth", "box_type", "user_type", "size", "header_length", "payload_sha256"],
+                "properties": {
+                  "offset": { "$ref": "#/$defs/offset" },
+                  "depth": { "type": "integer", "minimum": 0 },
+                  "box_type": { "type": "string" },
+                  "user_type": { "type": ["string", "null"] },
+                  "size": { "type": "integer", "minimum": 0 },
+                  "header_length": { "type": "integer", "minimum": 8 },
+                  "payload_sha256": { "$ref": "#/$defs/sha256" }
+                }
+              }
+            },
+            "boxes_truncated": { "type": "boolean" },
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["item_id", "item_type", "name", "content_type"],
+                "properties": {
+                  "item_id": { "type": "integer", "minimum": 0 },
+                  "item_type": { "type": "string" },
+                  "name": { "type": "string" },
+                  "content_type": { "type": ["string", "null"] }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["code", "offset", "detail"],
+        "properties": {
+          "code": { "type": "string" },
+          "offset": { "type": ["integer", "null"], "minimum": 0 },
+          "detail": { "type": "string" }
+        }
+      }
+    },
+    "findings_truncated": { "type": "boolean" }
+  },
+  "$defs": {
+    "offset": { "type": "integer", "minimum": 0 },
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  }
+}
