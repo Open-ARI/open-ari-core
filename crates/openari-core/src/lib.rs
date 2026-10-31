@@ -6,6 +6,8 @@
 //! structural validation, DNG identification, or evidence of authenticity.
 #![forbid(unsafe_code)]
 
+pub mod structure;
+
 use serde::Serialize;
 use std::fmt;
 

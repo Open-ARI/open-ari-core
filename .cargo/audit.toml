@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 ncdents, LLC.
+#
+# Reviewed exceptions for `cargo audit`. Each entry needs a reason, a scope,
+# and a review date. See docs/dependencies.md.
+[advisories]
+ignore = [
+  # RUSTSEC-2023-0071 (rsa, Marvin timing side channel). Affects RSA
+  # private-key operations: decryption and signing. openari-crypto only
+  # verifies RSA-PSS signatures with public keys, so no secret is exposed.
+  # Private-key use exists only in openari-crypto tests, with the published
+  # IETF test key. Reviewed 2026-10-31. Re-review on any rsa upgrade or if a
+  # non-test code path calls a private-key operation.
+  "RUSTSEC-2023-0071",
+]

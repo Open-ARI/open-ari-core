@@ -1,6 +1,6 @@
 [package]
 name = "openari-core"
-description = "Bounded inspection and verification contracts for Apple Reference Image"
+description = "Bounded inspection, structure listing, and verification contracts for Apple Reference Image"
 version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
@@ -12,6 +12,7 @@ publish.workspace = true
 
 [dependencies]
 serde.workspace = true
+sha2 = { workspace = true }
 
 [lints]
 workspace = true

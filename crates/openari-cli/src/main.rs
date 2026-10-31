@@ -1,7 +1,10 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright 2026 ncdents, LLC.
 use clap::{Parser, Subcommand};
-use openari_core::{DEFAULT_MAX_INPUT_BYTES, Verifier, capabilities};
+use openari_core::{
+    DEFAULT_MAX_INPUT_BYTES, Verifier, capabilities,
+    structure::{StructureLimits, describe},
+};
 use std::{
     fs::File,
     io::{self, Read, Write},
@@ -26,6 +29,9 @@ enum Command {
     Capabilities,
     /// Report a preliminary container hint. Does not validate the file.
     Inspect { file: PathBuf },
+    /// List JPEG segments, TIFF/DNG directories, or ISOBMFF/HEIC boxes with
+    /// offsets, lengths, and SHA-256 digests. Not ARI detection.
+    Structure { file: PathBuf },
     /// Emit an indeterminate report and exit 3. Verification is not implemented.
     Verify { file: PathBuf },
 }
@@ -49,6 +55,13 @@ fn run(args: Args) -> Result<u8, Box<dyn std::error::Error>> {
         Command::Capabilities => (serde_json::to_vec_pretty(&capabilities())?, 0),
         Command::Inspect { file } => (
             serde_json::to_vec_pretty(&Verifier::default().inspect(&read_bounded(&file)?)?)?,
+            0,
+        ),
+        Command::Structure { file } => (
+            serde_json::to_vec_pretty(&describe(
+                &read_bounded(&file)?,
+                &StructureLimits::default(),
+            )?)?,
             0,
         ),
         Command::Verify { file } => (
