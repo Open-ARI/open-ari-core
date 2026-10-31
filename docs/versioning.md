@@ -10,6 +10,8 @@ will use integers, OIDs, another discriminator, or several version fields.
 | Apple ARI format | Unknown; none supported | Preserve actual on-wire identifier |
 | C ABI | Experimental 1 | Breaking layout/ownership changes require new symbols or ABI major |
 | Report schema | 1 | Breaking changes increment schema version |
+| Structure report schema | 1 | Independent of the verification report; breaking changes increment it |
+| Composite signature profile | `draft-ietf-lamps-pq-composite-sigs-13` | A different draft or RFC revision is a new profile, never an in-place change |
 | Policy | `openari.pre-spec/1` | Immutable ID; changed trust meaning requires new policy ID |
 | Trust/revocation bundle | Not implemented | Content identity plus authenticated generation/freshness |
 | Fixture manifest | 1 | Independently versioned schema and immutable corpus revision |

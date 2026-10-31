@@ -42,6 +42,15 @@ allows it. Missing or stale revocation evidence cannot become 'not revoked'.
 Offline policy reports exactly which snapshot was evaluated and its age.
 Use a supplied trusted clock; detect unreasonable clock rollback in the updater.
 
+Apple documents RFC 3161 tokens (ECDSA P-256, SHA-256) for both capture
+bounds, and substitutes 2026-03-31 or the development time when a token fails
+or is missing. Report each bound with its provenance: verified token,
+documented substitute, or absent. A substitute is never a timestamp.
+
+Apple derives the photo GUID from the hash of the developed JPEG. If Apple
+publishes an authenticated revocation list, the GUID can be computed locally
+and revocation checked offline without revealing which image is being viewed.
+
 ## Attestation and receipts
 
 Apple capture attestation, verification of Apple evidence, and an OpenARI service

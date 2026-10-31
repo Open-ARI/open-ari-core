@@ -25,6 +25,9 @@ arbitrary pointer supplied by a hostile or buggy in-process caller.
 | Unsafe acceleration | Reviewed providers, differential testing, portable fallback, no weakened checks |
 | FFI misuse/panics | Small audited unsafe layer, explicit ownership, C smoke tests, unwind containment |
 | Compromised build/dependency | Locked dependencies, SHA-pinned Actions, limited permissions, advisory checks and provenance |
+| Device linkage through negatives | Undeveloped DNG negatives carry device-unique certificates and may carry the serial number. Do not log or retain them; report only digests |
+| Identifying data in structure reports | `openari structure` previews short ASCII values such as Make and Model. Treat reports as sensitive; do not log them in upload paths |
+| Substituted capture bounds | Apple substitutes 2026-03-31 or development time for failed timestamps. Report the bound's provenance; never present a substitute as a verified token |
 
 `Result` is not a proof that a parser cannot panic. Panics, hangs, excessive
 allocations, and inconsistent decisions are all fuzz findings. Unwind containment
@@ -34,6 +37,15 @@ hard availability boundary should use resource-limited worker processes.
 No image decoding is needed unless the confirmed verification profile requires
 it. If decoding becomes necessary, isolate it and apply pixel/decompression
 limits. Uploaded authentic images can still be malicious to downstream software.
+
+## Limits of Apple's system
+
+Apple can revoke a single image or every image from a sensor, and the
+revocation record is private. A verifier that depends on Apple's list inherits
+that governance: an image can stop verifying after publication without
+explanation. Apple, not mathematics, keeps the link between a sensor and a
+person private. The PCC confidence model is not public. Reports should state
+which of these properties the evaluation relied on.
 
 ## Review and release gates
 

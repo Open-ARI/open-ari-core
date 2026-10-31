@@ -14,14 +14,27 @@ Milestones depend on evidence and review rather than launch dates.
 | M6: production release | Independent audit, release attestations, SBOMs, docs and support policy | Audit findings resolved or clearly scoped; release gates pass on advertised platforms |
 | M7: optional receipts/services | Local sidecar and operator-signed verification receipts | Separate protocol review, privacy model, key lifecycle, replay/expiry semantics |
 
+## Progress as of 2026-10-31
+
+| Milestone | State |
+| --- | --- |
+| M0 | Complete |
+| M1 | In progress. Apple's design is documented; the format, keys, and revocation list are not. See [format status](format-status.md) |
+| M2 | Started. `openari structure` lists JPEG, TIFF/DNG, and ISOBMFF/HEIC structure with fuzzing. No ARI detection |
+| M3 | Started. `openari-crypto` implements composite ML-DSA-87 + RSA-3072-PSS (draft-13) against IETF vectors. Not connected to verification |
+
 ## Work available while specifications are pending
 
 - Refine the threat model, input budgets, report schema, and version negotiation.
-- Build bounded container parsers against their actual specifications without
-  labeling generic JPEG/TIFF parsing as ARI support.
-- Build fixture tooling, parser fuzzing, native packaging, and upload examples.
-- Evaluate crypto candidates against standard test vectors; reserve ARI
-  compatibility claims for confirmed Apple profiles.
+- Extend the structure walkers (for example HEIF item locations) against their
+  public specifications without labeling generic parsing as ARI support.
+- Verify RFC 3161 timestamp tokens offline with explicitly supplied
+  certificates. Apple documents RFC 3161 with ECDSA P-256 for capture bounds.
+- Build fixture tooling, native packaging, and upload examples.
+- Add a macOS 27 helper that records `PHReferenceImageInfo` results for
+  fixture manifests as an independent presence oracle, not a validity oracle.
+- Evaluate alternative crypto providers against the same test vectors; reserve
+  ARI compatibility claims for confirmed Apple profiles.
 - Define benchmark workloads and test the ABI from real language runtimes.
 
 ## Repository plan
