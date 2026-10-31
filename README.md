@@ -25,7 +25,8 @@ the Rust core, the `openari` CLI, and an experimental C interface.
 described the design but not published the file format, keys, or revocation
 list ([format status](docs/format-status.md)). The code lists JPEG, TIFF/DNG, and
 ISOBMFF/HEIC structure and includes a composite ML-DSA-87 + RSA-3072-PSS
-signature primitive checked against IETF test vectors. It does not locate ARI
+signature primitive checked against IETF test vectors, and an RFC 3161
+timestamp token verifier. It does not locate ARI
 payloads, verify Apple signatures, establish trust, or check revocation.
 `openari verify` always reports `indeterminate` and exits with code 3.
 Do not use this code to accept images as authenticated.

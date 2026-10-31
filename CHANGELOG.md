@@ -8,6 +8,9 @@
 - Add `openari-crypto` with composite ML-DSA-87 + RSA-3072-PSS-SHA512 verification
   per draft-ietf-lamps-pq-composite-sigs-13, tested against the IETF vector.
   It is not connected to `verify`.
+- Add `openari_crypto::rfc3161`: offline verification of RFC 3161 timestamp
+  tokens signed with ECDSA P-256 against a caller-supplied certificate, with
+  OpenSSL-generated fixtures and a fuzz target.
 - Record Apple's published Reference Image design and the PCC signing-service
   identifier in the format evidence register. No Apple revision is supported.
 - Add the dependency review and a scoped RUSTSEC-2023-0071 exception.

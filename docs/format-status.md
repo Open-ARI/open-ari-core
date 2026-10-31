@@ -145,7 +145,8 @@ No public parser, verifier, or sample corpus was found on GitHub as of
 `openari structure` lists JPEG segments, TIFF/DNG directories, and ISOBMFF/HEIC
 boxes with offsets and digests. It does not identify which of them hold ARI data.
 `openari-crypto` verifies draft-13 composite signatures against IETF test
-vectors. Neither is connected to `verify`.
+vectors, and verifies RFC 3161 timestamp tokens signed with ECDSA P-256 against
+a caller-supplied certificate. None of these is connected to `verify`.
 
 Add actual revision identifiers only after their meaning is confirmed. Every
 entry must name fixtures, supported algorithms, and remaining limitations.

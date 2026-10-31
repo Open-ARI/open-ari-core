@@ -30,3 +30,4 @@ jobs:
       - run: cargo install cargo-fuzz --version 0.13.2 --locked
       - run: cargo +nightly-2026-09-15 fuzz run inspect_verify -- -max_total_time=60 -max_len=1048576 -rss_limit_mb=1024
       - run: cargo +nightly-2026-09-15 fuzz run structure -- -max_total_time=120 -max_len=1048576 -rss_limit_mb=1024
+      - run: cargo +nightly-2026-09-15 fuzz run rfc3161 -- -max_total_time=120 -max_len=65536 -rss_limit_mb=1024

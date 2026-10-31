@@ -12,6 +12,8 @@ major or minor upgrade of a cryptographic dependency.
 | `sha2` 0.10 | core, crypto | SHA-256 digests in structure reports; SHA-256 and SHA-512 in composite verification | MIT OR Apache-2.0 |
 | `ml-dsa` 0.1.1 | crypto | ML-DSA-87 verification (FIPS 204) | Apache-2.0 OR MIT |
 | `rsa` 0.9.10 | crypto | RSASSA-PSS verification (RFC 8017) | MIT OR Apache-2.0 |
+| `p256` 0.14.0 | crypto | ECDSA P-256 verification for RFC 3161 tokens | Apache-2.0 OR MIT |
+| `cms` 0.2.3, `der` 0.7.10, `x509-cert` 0.2.5, `x509-tsp` 0.1.0 | crypto | DER decoding of CMS SignedData, certificates, and TSTInfo | Apache-2.0 OR MIT |
 
 All are RustCrypto or widely used Rust ecosystem crates. Transitive
 dependencies are under MIT, Apache-2.0, BSD-2-Clause, BSD-3-Clause, Unicode-3.0,
@@ -35,6 +37,18 @@ code. `.cargo/audit.toml` records a scoped exception, and the test
 `tests/public_key_only.rs` fails if library code adds private-key use. The
 0.10 release candidates were not chosen: the advisory lists them as affected
 too, and a release candidate adds API churn without a security benefit here.
+
+**p256 0.14.0.** Chosen over 0.13.2, which depends on `crypto-bigint` 0.5.5
+and is affected by RUSTSEC-2026-0387 (timing variability in constant-time
+operations, published 2026-10-23). Version 0.14 uses a patched `crypto-bigint`
+0.7. It is used with raw key and signature bytes, so it can sit beside the
+`der` 0.7 stack used by `cms` and `x509-cert`. Only public-key verification is
+performed.
+
+**cms, der, x509-cert, x509-tsp.** Stable RustCrypto releases on `der` 0.7, the
+same ASN.1 stack `rsa` 0.9 uses. The 0.3 release candidates were not chosen.
+Decoding is strict DER. The RFC 3161 verifier rejects any token change outside
+the unsigned embedded certificate set (see `tests/rfc3161.rs`).
 
 **Alternatives considered.** `aws-lc-rs` offers RSA and ML-DSA backed by
 AWS-LC, but requires a C and CMake toolchain on every CI platform and exposes

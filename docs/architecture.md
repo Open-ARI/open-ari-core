@@ -63,10 +63,10 @@ the verification path. Each request retains the snapshot it started with.
 
 ## Dependencies
 
-Dependencies cover CLI parsing, report serialization, SHA-2, ML-DSA, and
-RSA-PSS verification. [Dependencies](dependencies.md) records licenses, audit
-status, and advisory exceptions. ASN.1, certificate path validation, and RFC
-3161 parsing are not selected yet. Parsing a certificate or checking its
+Dependencies cover CLI parsing, report serialization, SHA-2, ML-DSA, RSA-PSS,
+and ECDSA P-256 verification. [Dependencies](dependencies.md) records licenses, audit
+status, and advisory exceptions. CMS, X.509, and TSTInfo decoding use the
+RustCrypto `der` 0.7 stack. Certificate path validation is not selected yet. Parsing a certificate or checking its
 signature is not full path validation.
 
 No dynamic loading of arbitrary crypto plugins. Providers are reviewed build

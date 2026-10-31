@@ -9,6 +9,7 @@ cargo-fuzz = true
 [dependencies]
 libfuzzer-sys = "0.4"
 openari-core = { path = "../crates/openari-core" }
+openari-crypto = { path = "../crates/openari-crypto" }
 [[bin]]
 name = "inspect_verify"
 path = "fuzz_targets/inspect_verify.rs"
@@ -18,6 +19,12 @@ bench = false
 [[bin]]
 name = "structure"
 path = "fuzz_targets/structure.rs"
+test = false
+doc = false
+bench = false
+[[bin]]
+name = "rfc3161"
+path = "fuzz_targets/rfc3161.rs"
 test = false
 doc = false
 bench = false

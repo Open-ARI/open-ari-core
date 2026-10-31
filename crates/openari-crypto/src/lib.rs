@@ -16,9 +16,14 @@
 //! `openari-core` does not call this crate and never reports an image as
 //! verified.
 //!
+//! The [`rfc3161`] module verifies RFC 3161 timestamp tokens signed with
+//! ECDSA P-256 against a caller-supplied certificate.
+//!
 //! Only public-key operations are performed. No secret material is handled
 //! outside tests.
 #![forbid(unsafe_code)]
+
+pub mod rfc3161;
 
 use ml_dsa::{EncodedSignature, EncodedVerifyingKey, MlDsa87};
 use rsa::{BigUint, Pss, RsaPublicKey, pkcs1::DecodeRsaPublicKey, traits::PublicKeyParts};
